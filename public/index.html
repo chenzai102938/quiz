@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FFF8F0">
+<title>孩子性格底色测评</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ========== 密码门禁页 ========== -->
+  <section id="gate" class="screen active">
+    <div class="gate-wrap">
+      <div class="hero-badge">发展心理学 · 32道真实育儿场景</div>
+      <h1 class="hero-title">孩子<span>性格底色</span>测评</h1>
+      <p class="hero-sub">他不是难带、胆小、矫情、固执<br>他只是和你想象的不一样</p>
+
+      <div class="card gate-card">
+        <h2>请输入测评密码</h2>
+        <p class="muted">密码由客服提供，每个密码可测 3 次</p>
+        <input id="passwordInput" type="text" placeholder="请输入密码" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="20">
+        <div id="gateError" class="error-msg"></div>
+        <button id="startBtn" class="btn btn-primary btn-block">开始测评</button>
+        <div id="gateRemaining" class="remaining-info" style="display:none"></div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature"><div class="feature-num">32</div><div class="feature-label">道场景题</div></div>
+        <div class="feature"><div class="feature-num">4</div><div class="feature-label">个气质维度</div></div>
+        <div class="feature"><div class="feature-num">5</div><div class="feature-label">分钟完成</div></div>
+      </div>
+
+      <p class="gate-foot">趣味参考 · 非临床诊断</p>
+    </div>
+  </section>
+
+  <!-- ========== 答题页 ========== -->
+  <section id="quiz" class="screen">
+    <div class="quiz-wrap">
+      <div class="quiz-header">
+        <div class="quiz-top">
+          <span id="progressText">第 1 / 32 题</span>
+          <span id="dimTag" class="dim-tag">能量水平</span>
+        </div>
+        <div class="progress-bar"><div id="progressFill"></div></div>
+      </div>
+
+      <div class="question-card">
+        <div class="q-number" id="qNumber">Q1</div>
+        <h2 id="qText" class="q-text"></h2>
+        <p class="q-hint">选择最符合孩子平常表现的一项</p>
+        <div id="options" class="options"></div>
+      </div>
+
+      <div class="quiz-nav">
+        <button id="prevBtn" class="btn btn-ghost" disabled>上一题</button>
+        <button id="nextBtn" class="btn btn-primary">下一题</button>
+      </div>
+      <p class="quiz-tip">可随时返回修改答案 · 答案自动保存</p>
+    </div>
+  </section>
+
+  <!-- ========== 结果页 ========== -->
+  <section id="result" class="screen">
+    <div class="result-wrap">
+      <div class="result-hero">
+        <div class="result-label">你家孩子的性格底色是</div>
+        <h1 id="rName" class="result-name"></h1>
+        <div id="rTag" class="result-tag"></div>
+        <p id="rHero" class="result-hero-line"></p>
+        <div class="radar-box">
+          <canvas id="radar" width="600" height="600"></canvas>
+          <div class="radar-legend">能量水平 · 情绪反应 · 趋近适应 · 坚持规律</div>
+        </div>
+        <div id="rSub" class="sub-badge"></div>
+      </div>
+
+      <div class="result-body" id="resultBody"></div>
+
+      <div class="share-card">
+        <div class="share-title">晒一晒你的结果</div>
+        <div id="rQuotes" class="quote-list"></div>
+        <div class="moment-box">
+          <div class="moment-label">朋友圈文案</div>
+          <p id="rMoment"></p>
+          <button id="copyMomentBtn" class="btn btn-tiny">复制文案</button>
+        </div>
+      </div>
+
+      <p class="disclaimer">本测评依据发展心理学气质理论设计，仅供趣味参考，不构成临床诊断或能力评估。若孩子存在明显的行为或情绪困扰，请咨询专业儿童心理工作者。</p>
+      <div class="result-bottom-space"></div>
+    </div>
+
+    <div class="action-bar">
+      <button id="saveImgBtn" class="action-btn"><span class="action-ico">图</span><span>保存长图</span></button>
+      <button id="copyLinkBtn" class="action-btn"><span class="action-ico">链</span><span>复制链接</span></button>
+      <button id="againBtn" class="action-btn"><span class="action-ico">测</span><span>再测一次</span></button>
+      <button id="reviewBtn" class="action-btn"><span class="action-ico">礼</span><span>好评有礼</span></button>
+    </div>
+  </section>
+
+</div>
+
+<!-- 通用弹窗 -->
+<div id="modal" class="modal" style="display:none">
+  <div class="modal-mask" onclick="closeModal()"></div>
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<!-- Supabase JS SDK（本地打包，避免依赖外部CDN，暴露 window.supabase） -->
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="supabase-client.js"></script>
+<script src="questions.js"></script>
+<script src="results.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
